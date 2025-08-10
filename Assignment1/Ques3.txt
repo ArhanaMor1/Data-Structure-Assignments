@@ -1,0 +1,1 @@
+Here first element gets the value 1 and the rest get the value 0. So output is 1 0 0 0 0 
