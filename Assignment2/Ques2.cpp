@@ -15,12 +15,12 @@ int main() {
 
 
 void bubble_sort(){
-    for(int i=0;i<7;i++){
-         for(int j=i+1;j<7;j++){
-        if(Array[i]>Array[j]) {
-           int temp=Array[i] ;
-           Array[i]=Array[j];
-           Array[j]=temp;
+    for(int i=0;i<6;i++){
+         for(int j=0;j<6-i;j++){
+        if(Array[j]>Array[j+1]) {
+           int temp=Array[j] ;
+           Array[j]=Array[j+1];
+           Array[j+1]=temp;
            }
          }
     }
