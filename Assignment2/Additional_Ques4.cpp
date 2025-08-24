@@ -3,9 +3,11 @@ using namespace std;
 
 int main() {
     int n;
+    cout << "Enter size of array: ";
     cin >> n;
     int arr[n];
     
+    cout << "Enter " << n << " elements (only 0, 1, 2):\n";
     for (int i = 0; i < n; i++) {
         cin >> arr[i];
     }
@@ -33,6 +35,7 @@ int main() {
         }
     }
 
+    cout << "Sorted array: ";
     for (int i = 0; i < n; i++) {
         cout << arr[i] << " ";
     }
