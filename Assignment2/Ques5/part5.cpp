@@ -16,7 +16,7 @@ int main() {
     for (i = 0; i < size; i++) {
         for (j = 0; j < size; j++) {
             if (i >= j) {
-                // take directly from input (lower triangle)
+                
                 std::cout << Array[k] << " ";
                 k++;
             } else {
