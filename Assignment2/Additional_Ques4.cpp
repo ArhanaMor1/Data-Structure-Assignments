@@ -18,9 +18,9 @@ int main() {
 
     while (mid <= high) {
         if (arr[mid] == 0) {
-            int t = arr[low];
+            int temp = arr[low];
             arr[low] = arr[mid];
-            arr[mid] = t;
+            arr[mid] = temp;
             low++;
             mid++;
         } 
@@ -28,9 +28,9 @@ int main() {
             mid++;
         } 
         else {
-            int t = arr[mid];
+            int temp = arr[mid];
             arr[mid] = arr[high];
-            arr[high] = t;
+            arr[high] = temp;
             high--;
         }
     }
