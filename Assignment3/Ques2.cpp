@@ -4,7 +4,7 @@ using namespace std;
 
 char stack[100];
 int top = -1;
-int stackSize = 100;  // renamed
+int stackSize = 100;  
 
 int isFull() {
     if (top == stackSize - 1) { cout << "Overflow\n"; return 1; }
