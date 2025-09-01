@@ -1,9 +1,16 @@
+
 #include <iostream>
 using namespace std;
 
+int sub(char *a, int length_a, char *b, int length_b){
+    if(length_a > length_b) return 0;
+    for(int p=0; p<length_a; p++)
+        if(a[p] != b[p]) return 0;
+    return 1;
+}
+
 int main() {
-    char s[100];
-    cout << "Enter the string: ";
+    char s[1000];
     cin >> s;
 
     int n = 0;
@@ -11,24 +18,22 @@ int main() {
 
     bool ok = false;
 
-    for (int i = 1; i < n-1 && !ok; i++) {
-        for (int j = i+1; j < n && !ok; j++) {
-            char *x = s;       // first part
-            char *y = s + i;   // second part
-            char *z = s + j;   // third part
+    for(int i=1; i<n-1 && !ok; i++){
+        for(int j=i+1; j<n && !ok; j++){
+            char *x = s;
+            char *y = s + i;
+            char *z = s + j;
+            int length_x = i, length_y = j-i, length_z = n-j;
 
-            int xl = i;
-            int yl = j - i;
-            int zl = n - j;
-
-            if ((xl >= yl && x[0]==y[0] && zl >= yl && z[0]==y[0]) ||
-                (yl >= xl && y[0]==x[0] && zl >= xl && z[0]==x[0]) ||
-                (zl >= xl && z[0]==x[0] && yl >= zl && y[0]==z[0])) {
+            if ((length_x >= length_y && sub(y,length_y,x,length_x) && length_z >= length_y && sub(z,length_z,x,length_x)) ||
+                (length_y >= length_x && sub(x,length_x,y,length_y) && length_z >= length_x && sub(z,length_z,y,length_y)) ||
+                (length_z >= length_x && sub(x,length_x,z,length_z) && length_y >= length_z && sub(y,length_y,z,length_z)))
                 ok = true;
-            }
         }
     }
 
-    if (ok) cout << "YES\n";
+    if(ok) cout << "YES\n";
     else cout << "NO\n";
+
+    return 0;
 }
