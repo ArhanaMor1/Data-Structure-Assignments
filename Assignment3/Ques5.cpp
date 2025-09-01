@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cmath> // for pow
+#include <cmath> 
 using namespace std;
 
 int stack[100];
@@ -51,7 +51,7 @@ int evaluatePostfix(string expr) {
             push(result);
         }
     }
-    return pop(); // final result
+    return pop(); 
 }
 
 int main() {
