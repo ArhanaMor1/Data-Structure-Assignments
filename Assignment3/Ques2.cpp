@@ -4,10 +4,10 @@ using namespace std;
 
 char stack[100];
 int top = -1;
-int size = 100;
+int stackSize = 100;  // renamed
 
 int isFull() {
-    if (top == size - 1) { cout << "Overflow\n"; return 1; }
+    if (top == stackSize - 1) { cout << "Overflow\n"; return 1; }
     else return 0;
 }
 
@@ -37,13 +37,11 @@ int main() {
     cout << "Enter string: ";
     cin >> str;
 
-    // Push all characters
     for (int i = 0; i < str.length(); i++) {
         push(str[i]);
     }
 
     cout << "Reversed string: ";
-    // Pop and store in a variable before printing
     for (int i = 0; i < str.length(); i++) {
         char a = pop();
         cout << a;
