@@ -40,7 +40,7 @@ bool isBalanced(string expression) {
             push(ch);
         } else if (ch == ')' || ch == '}' || ch == ']') {
             if (top == -1) {
-                return false; // no matching opening bracket
+                return false; 
             }
             char open = pop();
             if (!isMatching(open, ch)) {
