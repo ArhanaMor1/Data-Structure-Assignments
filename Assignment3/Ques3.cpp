@@ -33,7 +33,7 @@ bool isMatching(char open, char close) {
 }
 
 bool isBalanced(string expression) {
-    top = -1; // reset stack for each expression
+    top = -1;
     for (int i = 0; i < expression.length(); i++) {
         char ch = expression[i];
         if (ch == '(' || ch == '{' || ch == '[') {
