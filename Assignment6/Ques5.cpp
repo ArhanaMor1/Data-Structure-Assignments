@@ -7,7 +7,7 @@ struct Node{
 Node* head=NULL; 
 Node* current= head;
 
- void create_node(int x){
+ void create_node(int x,Node* &head,Node* &current){
      Node* NewNode=new Node; 
      NewNode->data=x;
      NewNode->next=NULL;
@@ -37,9 +37,9 @@ while(fast!=NULL&&fast->next!=NULL){
 } return false;
     }
     
-int main() { create_node(3);
-create_node(4);
-create_node(5);
+int main() { create_node(3,head,current);
+create_node(4,head,current);
+create_node(5,head,current);
 current->next=head;
 std::cout<<isCircular(head);
 }
