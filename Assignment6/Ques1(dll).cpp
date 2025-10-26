@@ -16,19 +16,10 @@ void insert_at_begin() {
 
     Node* newNode = new Node;
     newNode->data = value;
-
-    if(head == nullptr){
-        newNode->next = newNode;
-        newNode->prev = newNode;
-        head = newNode;
-        return;
-    }
-
-    Node* last = head->prev;
+    newNode->prev = nullptr;
     newNode->next = head;
-    newNode->prev = last;
-    last->next = newNode;
-    head->prev = newNode;
+
+    if(head != nullptr) head->prev = newNode;
     head = newNode;
 }
 
@@ -39,19 +30,18 @@ void insert_at_end() {
 
     Node* newNode = new Node;
     newNode->data = value;
+    newNode->next = nullptr;
 
     if(head == nullptr){
-        newNode->next = newNode;
-        newNode->prev = newNode;
+        newNode->prev = nullptr;
         head = newNode;
         return;
     }
 
-    Node* last = head->prev;
-    newNode->next = head;
-    newNode->prev = last;
-    last->next = newNode;
-    head->prev = newNode;
+    Node* temp = head;
+    while(temp->next != nullptr) temp = temp->next;
+    temp->next = newNode;
+    newNode->prev = temp;
 }
 
 void insert_after_value() {
@@ -67,12 +57,9 @@ void insert_after_value() {
     cin >> afterValue;
 
     Node* temp = head;
-    do {
-        if(temp->data == afterValue) break;
-        temp = temp->next;
-    } while(temp != head);
+    while(temp != nullptr && temp->data != afterValue) temp = temp->next;
 
-    if(temp->data != afterValue){
+    if(temp == nullptr){
         cout << "Value not found!\n";
         return;
     }
@@ -81,7 +68,7 @@ void insert_after_value() {
     newNode->data = value;
     newNode->next = temp->next;
     newNode->prev = temp;
-    temp->next->prev = newNode;
+    if(temp->next != nullptr) temp->next->prev = newNode;
     temp->next = newNode;
 }
 
@@ -98,12 +85,9 @@ void insert_before_value() {
     cin >> beforeValue;
 
     Node* temp = head;
-    do {
-        if(temp->data == beforeValue) break;
-        temp = temp->next;
-    } while(temp != head);
+    while(temp != nullptr && temp->data != beforeValue) temp = temp->next;
 
-    if(temp->data != beforeValue){
+    if(temp == nullptr){
         cout << "Value not found!\n";
         return;
     }
@@ -112,10 +96,11 @@ void insert_before_value() {
     newNode->data = value;
     newNode->next = temp;
     newNode->prev = temp->prev;
-    temp->prev->next = newNode;
-    temp->prev = newNode;
 
-    if(temp == head) head = newNode;
+    if(temp->prev != nullptr) temp->prev->next = newNode;
+    else head = newNode;
+
+    temp->prev = newNode;
 }
 
 void delete_specific_node() {
@@ -129,26 +114,17 @@ void delete_specific_node() {
     cin >> value;
 
     Node* temp = head;
-    do {
-        if(temp->data == value) break;
-        temp = temp->next;
-    } while(temp != head);
+    while(temp != nullptr && temp->data != value) temp = temp->next;
 
-    if(temp->data != value){
+    if(temp == nullptr){
         cout << "Value not found!\n";
         return;
     }
 
-    if(temp->next == temp){ // only one node
-        delete temp;
-        head = nullptr;
-        return;
-    }
+    if(temp->prev != nullptr) temp->prev->next = temp->next;
+    else head = temp->next;
 
-    temp->prev->next = temp->next;
-    temp->next->prev = temp->prev;
-
-    if(temp == head) head = temp->next;
+    if(temp->next != nullptr) temp->next->prev = temp->prev;
 
     delete temp;
 }
@@ -165,15 +141,14 @@ void search_node() {
 
     Node* temp = head;
     int pos = 0;
-    do {
+    while(temp != nullptr){
         if(temp->data == value){
             cout << "Value found at position " << pos << " from head.\n";
             return;
         }
         temp = temp->next;
         pos++;
-    } while(temp != head);
-
+    }
     cout << "Value not found!\n";
 }
 
@@ -184,11 +159,11 @@ void display_list() {
     }
 
     Node* temp = head;
-    do {
+    while(temp != nullptr){
         cout << temp->data << " <-> ";
         temp = temp->next;
-    } while(temp != head);
-    cout << "(head)\n";
+    }
+    cout << "NULL\n";
 }
 
 void menu(int choice){
@@ -205,7 +180,7 @@ void menu(int choice){
 }
 
 int main(){
-    cout << "Circular Doubly Linked List Operations Menu\n";
+    cout << "Doubly Linked List Operations Menu\n";
     cout << "1: Insert at beginning\n2: Insert at end\n3: Insert after value\n";
     cout << "4: Insert before value\n5: Delete a specific node\n6: Search a node\n7: Display list\n8: Exit\n";
 
