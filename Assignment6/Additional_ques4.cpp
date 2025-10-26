@@ -9,24 +9,6 @@ struct Node {
 
 Node* head = NULL;
 
-void add_at_end(int x) {
-    Node* n = new Node;
-    n->data = x;
-    n->next = NULL;
-    n->prev = NULL;
-
-    if (head == NULL) {
-        head = n;
-        return;
-    }
-
-    Node* temp = head;
-    while (temp->next != NULL)
-        temp = temp->next;
-    temp->next = n;
-    n->prev = temp;
-}
-
 void display() {
     Node* temp = head;
     while (temp != NULL) {
