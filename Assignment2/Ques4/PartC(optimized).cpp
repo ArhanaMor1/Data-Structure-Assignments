@@ -39,5 +39,5 @@ int is_vowel(char ch){
      obj.vowel_delete();
    
      obj.display();
-     
+     //we overwrit the string with the characters which are not vowels and then added /0 after we were done. 
  }
